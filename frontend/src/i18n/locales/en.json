@@ -1,0 +1,64 @@
+{
+  "appName": "MyGallery",
+  "nav": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "login": "Log in",
+    "register": "Sign up",
+    "logout": "Log out"
+  },
+  "home": {
+    "heroTitle": "Build your virtual museum in minutes",
+    "heroSubtitle": "Create 3D galleries, showcase your work, and share it with the world — no tech skills required.",
+    "cta": "Start for free",
+    "featuresTitle": "Everything you need to build your gallery"
+  },
+  "auth": {
+    "name": "Full name",
+    "email": "Email",
+    "password": "Password",
+    "loginTitle": "Log in",
+    "registerTitle": "Create your account",
+    "noAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?"
+  },
+  "dashboard": {
+    "title": "My Projects",
+    "newProject": "New Museum",
+    "empty": "No projects yet. Create your first museum now.",
+    "edit": "Edit",
+    "view": "Preview",
+    "delete": "Delete",
+    "share": "Share"
+  },
+  "editor": {
+    "roomSettings": "Room Settings",
+    "width": "Width",
+    "depth": "Depth",
+    "height": "Height",
+    "floorColor": "Floor color",
+    "wallColor": "Wall color",
+    "addImage": "Add image",
+    "wallSide": "Wall",
+    "north": "North",
+    "south": "South",
+    "east": "East",
+    "west": "West",
+    "save": "Save project",
+    "saved": "Saved",
+    "preview": "Preview museum",
+    "objectsPanel": "Wall Artworks",
+    "assetsPanel": "3D Assets & Furniture"
+  },
+  "viewer": {
+    "controls": "Controls: WASD to move, mouse to look around",
+    "back": "Back",
+    "fullscreen": "Fullscreen"
+  },
+  "share": {
+    "title": "Share your museum",
+    "copyLink": "Copy link",
+    "copied": "Copied",
+    "embed": "Embed code"
+  }
+}

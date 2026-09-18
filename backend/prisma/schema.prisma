@@ -1,0 +1,90 @@
+// لتشغيل المشروع فورًا بدون إعداد خادم، نستخدم SQLite افتراضيًا.
+// للتبديل إلى PostgreSQL: غيّر provider إلى "postgresql" وضع DATABASE_URL
+// بصيغة: postgresql://user:password@localhost:5432/artsteps
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String    @id @default(uuid())
+  name      String
+  email     String    @unique
+  password  String
+  createdAt DateTime  @default(now())
+  projects  Project[]
+}
+
+model Project {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  isPublic    Boolean  @default(false)
+  coverImage  String?
+  ownerId     String
+  owner       User     @relation(fields: [ownerId], references: [id])
+  rooms       Room[]
+  shares      Share[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Room {
+  id          String   @id @default(uuid())
+  name        String   @default("Main Hall")
+  width       Float    @default(10)
+  depth       Float    @default(10)
+  height      Float    @default(4)
+  floorColor  String   @default("#cbd5e1")
+  wallColor   String   @default("#f8fafc")
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  walls       Wall[]
+  objects     MediaObject[]
+  createdAt   DateTime @default(now())
+}
+
+// جدار داخل الغرفة (يُشتق افتراضيًا من أبعاد الغرفة، ويمكن إضافة جدران داخلية)
+model Wall {
+  id        String   @id @default(uuid())
+  roomId    String
+  room      Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  startX    Float
+  startZ    Float
+  endX      Float
+  endZ      Float
+  height    Float    @default(4)
+  hasDoor   Boolean  @default(false)
+  hasWindow Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+// عنصر معروض: صورة / فيديو / PDF / نموذج GLB / نص / صوت
+model MediaObject {
+  id        String   @id @default(uuid())
+  roomId    String
+  room      Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  type      String   // "image" | "video" | "pdf" | "model" | "text" | "audio"
+  url       String
+  title     String?
+  wallSide  String   // "north" | "south" | "east" | "west"
+  posX      Float    @default(0)
+  posY      Float    @default(1.5)
+  posZ      Float    @default(0)
+  rotationY Float    @default(0)
+  scale     Float    @default(1)
+  createdAt DateTime @default(now())
+}
+
+model Share {
+  id        String   @id @default(uuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  slug      String   @unique
+  createdAt DateTime @default(now())
+}
