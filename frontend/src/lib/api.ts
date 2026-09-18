@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const api = axios.create({ baseURL: "/api" });
+export const api = axios.create({ baseURL:"https:omr-space.vercel.app" });
 
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
